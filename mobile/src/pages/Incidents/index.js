@@ -4,27 +4,44 @@ import { useNavigation } from "@react-navigation/native";
 import { View, FlatList, Text, Image, TouchableOpacity } from "react-native";
 
 import api from "../../services/api";
-
 import styles from "./styles";
-
 import logoImg from "../../assets/logo.png";
 
 export default function Incidents() {
   const navigation = useNavigation();
 
   const [incidents, setIncidents] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   async function loadIncidents() {
-    const res = await api.get(`incidents`);
-    setIncidents(res.data);
+    if (loading) {
+      return;
+    }
+
+    if (incidents.length > 0 && incidents.length === total) {
+      return;
+    }
+
+    setLoading(true);
+
+    const res = await api.get(`incidents`, {
+      params: { page }
+    });
+
+    setIncidents([...incidents, ...res.data]);
+    setTotal(res.headers["x-total-count"]);
+    setPage(page + 1);
+    setLoading(false);
   }
 
   useEffect(() => {
     loadIncidents();
   }, []);
 
-  function navigateToDetail() {
-    navigation.navigate("Detail");
+  function navigateToDetail(incident) {
+    navigation.navigate("Detail", { incident });
   }
 
   return (
@@ -45,6 +62,8 @@ export default function Incidents() {
       <FlatList
         style={styles.incidentList}
         data={incidents}
+        onEndReached={loadIncidents}
+        onEndReachedThreshold={0.2}
         keyExtractor={incident => String(incident.id)}
         showsVerticalScrollIndicator={false}
         renderItem={({ item: incident }) => (
@@ -60,7 +79,7 @@ export default function Incidents() {
 
             <TouchableOpacity
               style={styles.detailsButton}
-              onPress={navigateToDetail}
+              onPress={() => navigateToDetail(incident)}
             >
               <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
               <Feather name="arrow-right" size={16} color="#e02041" />
