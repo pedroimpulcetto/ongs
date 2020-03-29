@@ -3,6 +3,7 @@ import { FiSun } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 import { Container, Content } from "./styles";
+import { Button } from "../../styles/utils";
 
 export default function CreatedOng({ name, id }) {
   return (
@@ -16,9 +17,7 @@ export default function CreatedOng({ name, id }) {
         </p>
       </Content>
       <Link to="/" className="back-link" kj>
-        <button className="button" type="submit">
-          Fazer Login
-        </button>
+        <Button type="submit">Fazer Login</Button>
       </Link>
     </Container>
   );

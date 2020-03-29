@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import "./styles.css";
-import logoImg from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
+import { Formulario } from "./styles";
+import {
+  Container,
+  Content,
+  Button,
+  BackLink,
+  Sessao
+} from "../../styles/utils";
+import logoImg from "../../assets/logo.svg";
 import * as AlertActions from "../../store/modules/alert/actions";
 import * as LoadingActions from "../../store/modules/loading/actions";
 
@@ -32,12 +38,6 @@ export default function Register() {
     } catch (error) {
       dispatch(AlertActions.error("Erro ao cadastrar ONG."));
     }
-
-    // await api.post("ongs", ong).then(res => {
-    //   if (res.status === 200) {
-    //     dispatch(AlertActions.success("ONG cadastrada com sucesso."));
-    //   }
-    // });
   }
 
   function handleChange(e) {
@@ -46,9 +46,9 @@ export default function Register() {
   }
 
   return (
-    <div className="register-container">
-      <div className="content">
-        <section>
+    <Container className="register-container">
+      <Content className="content">
+        <Sessao>
           <img src={logoImg} alt="Be The Hero" />
 
           <h1>Cadastro</h1>
@@ -57,14 +57,14 @@ export default function Register() {
             os casos da sua ONG.
           </p>
 
-          <Link to="/" className="back-link">
+          <BackLink to="/">
             <FiArrowLeft size={16} color="#e02041" />
             Nao tenho cadastro
-          </Link>
-        </section>
+          </BackLink>
+        </Sessao>
 
         {!id ? (
-          <form action="" onSubmit={handleRegister}>
+          <Formulario action="" onSubmit={handleRegister}>
             <input
               placeholder="Nome da ONG"
               onChange={handleChange}
@@ -103,14 +103,12 @@ export default function Register() {
               />
             </div>
 
-            <button className="button" type="submit">
-              Cadastrar
-            </button>
-          </form>
+            <Button type="submit">Cadastrar</Button>
+          </Formulario>
         ) : (
           <CreatedOng id={id} name={ong.name} />
         )}
-      </div>
-    </div>
+      </Content>
+    </Container>
   );
 }

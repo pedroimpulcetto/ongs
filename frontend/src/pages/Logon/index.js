@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { FiLogIn } from "react-icons/fi";
-import { Link, useHistory } from "react-router-dom";
-
-import "./styles.css";
+import { useHistory } from "react-router-dom";
+import { Button, BackLink } from "../../styles/utils";
+import { Container } from "./styles";
 import logoImg from "../../assets/logo.svg";
 import heroesImg from "../../assets/heroes.png";
 import api from "../../services/api";
@@ -37,8 +37,8 @@ export default function Logon() {
   }
 
   return (
-    <div className="logon-container">
-      <section className="form">
+    <Container>
+      <section>
         <img src={logoImg} alt="Be The Hero" />
 
         <form action="" onSubmit={handleLogin}>
@@ -51,18 +51,16 @@ export default function Logon() {
             name="id"
             value={ongId ? id : ""}
           />
-          <button className="button" type="submit">
-            Entrar
-          </button>
+          <Button type="submit">Entrar</Button>
 
-          <Link className="back-link" to="/register">
+          <BackLink to="/register">
             <FiLogIn size={16} color="#e02041" />
             Nao tenho cadastro
-          </Link>
+          </BackLink>
         </form>
       </section>
 
       <img src={heroesImg} alt="Heroes" />
-    </div>
+    </Container>
   );
 }

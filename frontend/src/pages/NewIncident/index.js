@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import { Container } from './styles';
 
+import { Formulario } from "./styles";
+import {
+  Button,
+  BackLink,
+  Sessao,
+  Container,
+  Content
+} from "../../styles/utils";
+import logoImg from "../../assets/logo.svg";
 import api from "../../services/api";
-
+import { FiArrowLeft } from "react-icons/fi";
 import * as AlertActions from "../../store/modules/alert/actions";
 import * as LoadingActions from "../../store/modules/loading/actions";
-
-import "./styles.css";
-import logoImg from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
-import { FiArrowLeft } from "react-icons/fi";
 
 export default function NewIncident() {
   const dispatch = useDispatch();
@@ -52,9 +55,9 @@ export default function NewIncident() {
   }
 
   return (
-    <div className="new-incident-container">
-      <div className="content">
-        <section>
+    <Container>
+      <Content>
+        <Sessao>
           <img src={logoImg} alt="Be The Hero" />
 
           <h1>Cadastrar Novo Caso</h1>
@@ -63,13 +66,13 @@ export default function NewIncident() {
             isso.
           </p>
 
-          <Link to="/profile" className="back-link">
+          <BackLink to="/profile">
             <FiArrowLeft size={16} color="#e02041" />
             Voltar para home
-          </Link>
-        </section>
+          </BackLink>
+        </Sessao>
 
-        <form action="" onSubmit={handleSubmit}>
+        <Formulario action="" onSubmit={handleSubmit}>
           <input
             name="title"
             placeholder="Titulo do caso"
@@ -89,11 +92,9 @@ export default function NewIncident() {
             onChange={handleChange}
           />
 
-          <button className="button" type="submit">
-            Cadastrar
-          </button>
-        </form>
-      </div>
-    </div>
+          <Button type="submit">Cadastrar</Button>
+        </Formulario>
+      </Content>
+    </Container>
   );
 }

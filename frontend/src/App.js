@@ -8,12 +8,14 @@ import store from "./store";
 
 import MyAlert from "./components/Alert";
 import Loading from "./components/Loading";
+import GlobalStyle from "./styles/global";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Routes />
+        <GlobalStyle />
         <MyAlert />
         <Loading />
       </BrowserRouter>

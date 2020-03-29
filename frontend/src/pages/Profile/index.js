@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { FiPower, FiTrash2 } from "react-icons/fi";
 
+import { Container, List, Title } from "./styles";
+import { BackLink } from "../../styles/utils";
 import api from "../../services/api";
-import "./styles.css";
 import logoImg from "../../assets/logo.svg";
 import * as AlertActions from "../../store/modules/alert/actions";
 import * as LoadingActions from "../../store/modules/loading/actions";
@@ -63,22 +64,22 @@ export default function Profile() {
 
   return (
     <Fragment>
-      <div className="profile-container">
+      <Container>
         <header>
           <img src={logoImg} alt="Be the hero" />
           <span>Bem vinda, {ongName}</span>
 
-          <Link className="button" to="/incidents/new">
+          <BackLink className="button" to="/incidents/new">
             Cadastrar novo caso
-          </Link>
+          </BackLink>
           <button type="button" onClick={handleLogout}>
             <FiPower size={18} color="#e02041" />
           </button>
         </header>
 
-        <h1>Casos Cadastrados</h1>
+        <Title>Casos Cadastrados</Title>
 
-        <ul>
+        <List>
           {incidents.map(incident => (
             <li key={incident.id}>
               <strong>CASO:</strong>
@@ -98,8 +99,8 @@ export default function Profile() {
               </button>
             </li>
           ))}
-        </ul>
-      </div>
+        </List>
+      </Container>
       {modal && (
         <ModalDelete
           toggle={toggle}
