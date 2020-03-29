@@ -1,0 +1,21 @@
+.title-modal-delete {
+  background-color: #e02041 !important;
+  color: white;
+}
+
+.text-confirm-delete {
+  font-size: 18pt;
+  font-weight: bold;
+  color: #737373;
+}
+
+.button-success {
+  background: #e02041 !important;
+
+  font-weight: bold !important;
+}
+
+.button-cancel {
+  font-weight: bold !important;
+  background: #87db54 !important;
+}
